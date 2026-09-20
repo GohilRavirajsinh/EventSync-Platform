@@ -1,0 +1,11 @@
+# Node modules ko GitHub par nahi bhejna (Ye bohot heavy hote hain)
+node_modules/
+server/node_modules/
+client/node_modules/
+# Secrets aur Passwords ko kabhi internet par leak nahi karna
+.env
+server/.env
+client/.env
+# Mac/Windows ki faltu files
+.DS_Store
+Thumbs.db
