@@ -48,3 +48,21 @@ export const getAllEvents = async (req, res) => {
         });
     }
 };
+
+// get Single event (Find a Specific Id )
+export const getSingleEvent = async (req, res) => {
+    try {
+        const { eventId } = req.params; // URL se ID nikali
+
+        const event = await Event.findById(eventId).populate("organizer", "name email");
+
+        if (!event) {
+            return res.status(404).json({ error: "Event not found!" });
+        }
+
+        res.status(200).json(event);
+    } catch (error) {
+        console.log("Error in getSingleEvent:", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
