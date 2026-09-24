@@ -1,4 +1,3 @@
-import bcrypt from 'bcryptjs';
 import { User } from '../models/userModel.js';
 import { generateTokenAndSetCookie } from '../utils/generateToken.js';
 
@@ -19,14 +18,11 @@ export const register = async (req, res) => {
             });
         }
 
-        // Password Hash (Bcrypt)
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
+        // Ab Hashing ki chinta nahi, Model khud sambhal lega! password hashing
         const newUser = new User({
             name,
             email,
-            password: hashedPassword,
+            password, // Direct normal password pass karo
             role: role || 'USER'
         });
 
@@ -58,7 +54,7 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
-        const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
+        const isPasswordCorrect = await user.isPasswordCorrect(password);
         if (!user || !isPasswordCorrect) {
             return res.status(400).json({ error: "Invalid Email or Password" });
         }

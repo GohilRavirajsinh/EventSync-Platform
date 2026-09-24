@@ -8,13 +8,13 @@ import eventRoutes from './routes/eventRoutes.js';
 import ticketRoutes from './routes/ticketRoutes.js';
 
 const app = express();
+connectDB();
 app.use(cors({
     origin: "http://localhost:5173", // Frontend ka exact pata (URL)
     credentials: true // Cookies ko aane-jaane ki permission do
 }));
 app.use(express.json());
 app.use(cookieParser());
-connectDB();
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/ticket', ticketRoutes);

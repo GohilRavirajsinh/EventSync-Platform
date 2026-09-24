@@ -1,4 +1,6 @@
 import { Event } from '../models/eventModel.js';
+import cloudinary from '../config/cloudinary.js';
+import fs from 'fs';
 
 // 1. Create Event (Sirf ORGANIZER ke liye)
 export const createEvent = async (req, res) => {
@@ -11,6 +13,16 @@ export const createEvent = async (req, res) => {
             });
         }
 
+        // Image Logic
+        let imageUrl = '';
+        if (req.file) {
+            const uploadResponse = await cloudinary.uploader.upload(req.file.path, {
+                folder: "eventsync_posters"
+            });
+            imageUrl = uploadResponse.secure_url;
+            fs.unlinkSync(req.file.path);
+        }
+
         // Naya event database me save karo
         const newEvent = new Event({
             title,
@@ -20,7 +32,8 @@ export const createEvent = async (req, res) => {
             entryFee,
             totalSeats,
             availableSeats: totalSeats,
-            organizer: req.user._id
+            organizer: req.user._id,
+            imageUrl: imageUrl
         });
 
         await newEvent.save();
