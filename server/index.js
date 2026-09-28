@@ -1,9 +1,9 @@
 import 'dotenv/config';
 import express from "express";
 import cors from "cors";
+import cookieParser from 'cookie-parser';
 import connectDB from "./config/database.js";
 import authRoutes from './routes/authRoutes.js';
-import cookieParser from 'cookie-parser';
 import eventRoutes from './routes/eventRoutes.js';
 import ticketRoutes from './routes/ticketRoutes.js';
 
