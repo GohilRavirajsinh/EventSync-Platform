@@ -39,7 +39,7 @@ export const protectRoute = async (req, res, next) => {
 // Guard 2: Check karega ki user Admin ya Organizer hai ya nahi (Roles)
 export const restrictTo = (...roles) => {
     return (req, res, next) => {
-        // req.user.role check karenge jo humne Guard 1 se nikala
+        // req.user.role check karenge jo humne protectRoute se nikala
         if (!roles.includes(req.user.role)) {
             return res.status(403).json({
                 error: `Your role (${req.user.role}) is not allowed for this action!`

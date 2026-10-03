@@ -12,7 +12,7 @@ const EventDetail = () => {
     useEffect(() => {
         const fetchSingleEvent = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:5000/api/events/' + id, {
+                const response = await axios.get('http://localhost:5000/api/events/' + id, {
                     withCredentials: true
                 });
                 setEvent(response.data);
@@ -31,7 +31,7 @@ const EventDetail = () => {
         }
 
         try {
-            const { data } = await axios.post('http://127.0.0.1:5000/api/ticket/book/' + id, {}, { withCredentials: true });
+            const { data } = await axios.post('http://localhost:5000/api/ticket/create-order/' + id, {}, { withCredentials: true });
             
             const options = {
                 key: import.meta.env.VITE_RAZORPAY_KEY_ID, 
@@ -42,7 +42,7 @@ const EventDetail = () => {
                 order_id: data.order.id,
                 handler: async function (response) {
                     try {
-                        await axios.post('http://127.0.0.1:5000/api/ticket/verify/' + id, {
+                        await axios.post('http://localhost:5000/api/ticket/verify-payment/' + id, {
                             razorpay_order_id: response.razorpay_order_id,
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature

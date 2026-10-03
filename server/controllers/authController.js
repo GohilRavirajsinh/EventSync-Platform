@@ -1,4 +1,4 @@
-import { User } from '../models/userModel.js';
+﻿import { User } from '../models/userModel.js';
 import { generateTokenAndSetCookie } from '../utils/generateToken.js';
 
 export const register = async (req, res) => {
@@ -54,8 +54,9 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
+        if (!user) return res.status(400).json({ error: "Invalid Email or Password" });
         const isPasswordCorrect = await user.isPasswordCorrect(password);
-        if (!user || !isPasswordCorrect) {
+        if (!isPasswordCorrect) {
             return res.status(400).json({ error: "Invalid Email or Password" });
         }
 

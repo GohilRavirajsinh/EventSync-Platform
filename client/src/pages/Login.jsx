@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
 import axios from 'axios';
+import { useContext, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
@@ -15,8 +15,8 @@ const Login = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post('http://127.0.0.1:5000/api/auth/login', { email, password }, { withCredentials: true });
-            setUser(response.data.user);
+            const response = await axios.post('http://localhost:5000/api/auth/login', { email, password }, { withCredentials: true });
+            setUser(response.data);
             navigate('/');
         } catch (error) {
             alert(error.response?.data?.error || 'Login failed!');
@@ -57,7 +57,7 @@ const Login = () => {
                             required
                         />
                     </div>
-                    
+
                     <button
                         type="submit"
                         disabled={loading}

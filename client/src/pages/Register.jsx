@@ -17,7 +17,7 @@ const Register = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post('http://127.0.0.1:5000/api/auth/register', { name, email, password, role }, { withCredentials: true });
+            const response = await axios.post('http://localhost:5000/api/auth/register', { name, email, password, role }, { withCredentials: true });
             setUser(response.data);
             alert('Registration Successful! Welcome to EventSync.');
             navigate('/');

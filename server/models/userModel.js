@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+﻿import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
@@ -8,15 +8,14 @@ const userSchema = new mongoose.Schema({
     role: { type: String, enum: ['USER', 'ORGANIZER', 'ADMIN'], default: 'User' }
 }, { timestamps: true });
 
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function () {
 
     // Agar password change nahi hua hai, toh dobara hash mat karo
-    if (!this.isModified('password')) return next();
+    if (!this.isModified('password')) return;
 
     // Hash Password
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
-    next();
 })
 
 userSchema.methods.isPasswordCorrect = async function (enteredPassword) {

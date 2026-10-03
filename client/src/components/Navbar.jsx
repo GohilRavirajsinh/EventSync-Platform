@@ -9,7 +9,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
-            await axios.post('http://127.0.0.1:5000/api/auth/logout', {}, { withCredentials: true });
+            await axios.post('http://localhost:5000/api/auth/logout', {}, { withCredentials: true });
             setUser(null);
             navigate('/login');
         } catch (error) {
@@ -34,7 +34,7 @@ const Navbar = () => {
                                 <Link to="/dashboard" className="text-gray-700 hover:text-purple-600 font-semibold transition-colors">Dashboard</Link>
                                 <div className="h-8 w-px bg-gray-300 mx-2"></div>
                                 <span className="font-bold text-blue-900 flex items-center">
-                                    Hi, {user.name} 
+                                    Hi, {user.name}
                                     <span className="ml-2 text-xs bg-blue-100 text-blue-800 px-2.5 py-1 rounded-full font-black border border-blue-200 shadow-sm">
                                         {user.role}
                                     </span>
