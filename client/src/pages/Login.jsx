@@ -29,7 +29,7 @@ const Login = () => {
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
             <div className="bg-white/80 backdrop-blur-xl p-10 rounded-3xl shadow-2xl w-full max-w-md border border-white/50">
                 <div className="text-center mb-8">
-                    <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Welcome Back ??</h2>
+                    <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Welcome Back !</h2>
                     <p className="text-gray-500 font-medium">Please enter your details to sign in.</p>
                 </div>
 
@@ -67,7 +67,7 @@ const Login = () => {
                     </button>
                 </form>
                 <p className="mt-8 text-center text-gray-600">
-                    Don't have an account? <Link to="/register" className="text-blue-600 font-bold hover:underline">Sign up for free</Link>
+                    Don&apos;t have an account? <Link to="/register" className="text-blue-600 font-bold hover:underline">Sign up for free</Link>
                 </p>
             </div>
         </div>
